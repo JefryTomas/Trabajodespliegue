@@ -15,7 +15,7 @@ scaler = _pack["scaler"]
 cols_escalar = _pack["cols_escalar"]
 cols_no_escalar = _pack["cols_no_escalar"]
 
-# ✅ orden exacto de columnas con el que el modelo fue entrenado
+#  orden exacto de columnas con el que el modelo fue entrenado
 FEATURES_MODEL = list(getattr(modelo, "feature_names_in_", []))
 if not FEATURES_MODEL:
     FEATURES_MODEL = cols_escalar + cols_no_escalar
@@ -38,7 +38,7 @@ def predecir_vino(data: dict):
             "esperadas": FEATURES_MODEL
         }
 
-    # ✅ Reordenar EXACTO como el modelo fue entrenado
+    #  Reordenar EXACTO como el modelo fue entrenado
     X = df.reindex(columns=FEATURES_MODEL).copy()
 
     # Convertir a numérico (por si llega como string)
@@ -58,7 +58,7 @@ def predecir_vino(data: dict):
     X_scaled = X.copy()
     X_scaled[cols_escalar] = scaler.transform(X[cols_escalar])
 
-    # ✅ Predecir como numpy para evitar problemas por nombres/orden
+    #  Predecir como numpy para evitar problemas por nombres/orden
     calidad_pred = float(modelo.predict(X_scaled.to_numpy())[0])
 
     vino = "bueno" if calidad_pred >= UMBRAL_BUENO else "malo"

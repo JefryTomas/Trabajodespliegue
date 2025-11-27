@@ -9,7 +9,7 @@ def health():
 
 @app.get("/features")
 def features():
-    # ✅ devuelve las columnas en el orden EXACTO que el modelo espera
+    #  devuelve las columnas en el orden EXACTO que el modelo espera
     return jsonify({"ok": True, "features": FEATURES_MODEL})
 
 @app.post("/predict")
